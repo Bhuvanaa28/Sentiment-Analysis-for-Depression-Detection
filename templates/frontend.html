@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Depression Detection Form</title> 
+        <meta charset="UTF-8" name="description" content="A form to detect Depression in online users">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <script src="{{ url_for('static', filename='frontend.js') }}"></script>  
+        <link rel="stylesheet" href="{{ url_for('static', filename='frontend_css.css') }}">
+    </head>
+<body>
+    <header class="heading">
+<h1>Depression Detection Form</h1>
+    </header>
+    <br>
+    <div class="sect">
+    <h2 style="text-align:center;text-decoration:underline;">Depression is a very real illness</h2>
+    <p>Globally, it is estimated that around 5.0% of the population suffer from depression. That equates to
+        approximately 280 million people. In many cases, depression if left undetected
+        can lead to suicide. </p>
+        <p>There are many factors which cause depression such as.. </p>
+    <ul>
+        <li>Too much pressure at work</li><br>
+        <li>Losing a loved one</li><br>
+        <li>Disturbed sleep cycle</li><br>
+        <li>Financial problems</li><br>
+        <li>Hormones and the list goes on..</li><br>
+    </ul>
+    <p>But the good news is that, depression is a <b>very treatable </b>illness if it is 
+        identified in time and the patient seeks help from external sources such as </p><br>
+        <ul>
+            <li>Therapy</li><br>
+            <li>Antidepressant medications such as Esketamine, Norepinephrine, etc</li><br>
+            <li>Fixing sleep cycle, diet (eating more healthy vitamin rich foods)</li><br>
+            <li>Adding exercise to lifestyle which boosts self-confidence</li><br>
+        </ul>
+    <br>
+    <p>Below, there exists a form which collects your current thoughts and can accurately gauge whether you may have 
+        some depressive tendencies.</p><br><hr>
+</div>
+    <div class="box">
+    <p><span style="background-color:beige;color:black;font-size:24px;padding:20px;border-radius:5px;border:2px solid black">Enter your current thoughts in the 
+        space below</span></p>
+<div class="form1">
+<form action="{{ url_for('result') }}" method="post">
+    <label for="dep" style="color:black"></label><br><br>
+    <textarea name="feelings" id="dep" rows="30" cols="80" onmouseover=func1() onmouseout=func2() 
+    onchange=validate() required></textarea><br><br><br>
+    <input style="color:black" type="submit" value="Submit"><br><br>
+    <button type="button" class="but1" onclick=func3()>Reload formpage</button><br>
+</form>
+</div>
+</div><hr>
+<div id="result">
+    <p> Prediction probability: {{ pred_prob }} </p>
+    {% if r=='Positive' %}
+    <h2>Negative sentiment</h2>
+    {% elif r=='Negative' %}
+    <h2>Positive sentiment</h2>
+    {% endif %}
+</div>
+</body>
+</html>
