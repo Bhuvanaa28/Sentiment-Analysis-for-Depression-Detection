@@ -1,21 +1,24 @@
-from flask import Flask,request
-from flask.templating import render_template
+from flask import Flask,request,render_template
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from nltk.stem.wordnet import WordNetLemmatizer
-import pickle,string,re
+import pickle,string,unicodedata,re
 
 def process_data(txt):
+    text_emoji = re.compile('[\U00010000-\U0010ffff]', flags=re.UNICODE)
     text_schar = re.compile('[^A-Za-z0-9 ]+')
     text_nums = re.compile('[0-9]+')    
-    temp=txt.translate(txt.maketrans('','',string.punctuation))          
+    temp=text_emoji.sub(r'',txt)  
+    temp=temp.translate(temp.maketrans('','',string.punctuation))          
     temp=text_schar.sub(r'',temp)
     temp=text_nums.sub(r'',temp)
+    temp = unicodedata.normalize('NFKD',temp).encode('ascii', 'ignore').decode('utf-8', 'ignore')
     temp = temp.lower()
+
     token = word_tokenize(temp)
     token_no_sw = [word for word in token if word not in stopwords.words()]
     lemmatizer = WordNetLemmatizer()
-    lemm_token = [lemmatizer.lemmatize(word,'v') for word in token_no_sw]
+    lemm_token = [lemmatizer.lemmatize(word) for word in token_no_sw]
     temp = " ".join(lemm_token)
     return temp
 
@@ -41,7 +44,8 @@ def home():
 def result():
     x = request.form['feelings']
     predict_result,pred,pred_prob= predict(x)
-    return render_template("frontend.html",r=predict_result,pred=pred)
+    return render_template("frontend.html",r=predict_result,pred=pred,pred_prob=pred_prob)
 
 if __name__=='__main__':
-    app.run(debug=True)    
+    app.run(debug=True)
+
