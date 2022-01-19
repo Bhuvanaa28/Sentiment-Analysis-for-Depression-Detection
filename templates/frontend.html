@@ -7,7 +7,7 @@
         <script src="{{ url_for('static', filename='frontend.js') }}"></script>  
         <link rel="stylesheet" href="{{ url_for('static', filename='frontend_css.css') }}">
     </head>
-<body>
+<body onload="(function(){if('{{ scroll }}' == 'True'){window.scrollTo(0,document.body.scrollHeight);}})()">
     <header class="heading">
 <h1>Depression Detection Form</h1>
     </header>
@@ -44,18 +44,19 @@
 <form action="{{ url_for('result') }}" method="post">
     <label for="dep" style="color:black"></label><br><br>
     <textarea name="feelings" id="dep" rows="30" cols="80" onmouseover=func1() onmouseout=func2() 
-    onchange=validate() required></textarea><br><br><br>
-    <input style="color:black" type="submit" value="Submit"><br><br>
+     required></textarea><br><br><br>
+    <input style="color:black" type="submit" value="Submit">
     <button type="button" class="but1" onclick=func3()>Reload formpage</button><br>
 </form>
 </div>
 </div><hr>
 <div id="result">
-    <p> Prediction probability: {{ pred_prob }} </p>
+    <p>Prediction: {{ pred }}</p>
+    <p>Positive/Negative: {{ r }}</p>
     {% if r=='Positive' %}
-    <h2>Negative sentiment</h2>
+    <h2>Your thoughts are depressive</h2>
     {% elif r=='Negative' %}
-    <h2>Positive sentiment</h2>
+    <h2>Your thoughts are not depressive</h2>
     {% endif %}
 </div>
 </body>
