@@ -1,0 +1,67 @@
+body
+{
+    background-image:url('formpic1.jpg');
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+    background-size:cover;
+    font-family:Arial;
+    color:ghostwhite;
+}
+.form1 {
+    text-align:center;
+    background-color:transparent;
+    /*border:10px solid red;*/
+    width:800px;
+    margin:auto; 
+    box-sizing:border-box;
+    padding:25px;
+    font-family:'Courier New';
+}
+.heading {
+    text-align:center;
+    border:5px solid black;
+    background-color:yellowgreen;
+    font-family:'Courier New';
+}
+.box {
+    text-align:center;
+    padding:25px;
+    box-sizing:border-box;
+    /*border:8px ridge green;
+    outline:2px solid orangered;*/
+    color:white;
+    font-family:Arial;
+    margin:10px 60px 10px 60px;
+}
+.sect {
+    font-size:22px;
+    margin-left:25px;
+    color:ghostwhite;
+}
+ul {
+    display: table;
+    margin: 0 auto;
+    list-style-type:square;
+}
+textarea {
+    color:black;
+    border-radius:10px;
+    border:20px solid lightblue;
+}
+input[type=submit], .but1 {
+    width:30%;
+    padding:15px;
+    font-size:23px;
+    border:2px solid black;
+    border-radius:10px;
+    background-color:beige;
+    display:inline;
+}
+#result {
+    text-align:center;
+    font-family:'Courier New';
+    font-size:23px;
+    width:100%;
+    background-color:black;
+    padding:30px;
+}
